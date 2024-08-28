@@ -3,6 +3,11 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { getMascotaById, updateMascota } from '../services/api';
 import { ProgressBar } from '../components/ProgressBar';
 import { ActionButton } from '../components/ActionButton';
+import tamagochiFondo from '../assets/tamacogochi fondo.svg';
+import alien from "../assets/DALL·E  alien.svg"
+import dragon from "../assets/DALL·E dragon.svg";
+import ghost from "../assets/DALL·E ghost.svg";
+import unicorn from "../assets/DALL·E unicorn.svg";
 
 export const PetInteractionPage = () => {
     const { id } = useParams();
@@ -67,29 +72,52 @@ export const PetInteractionPage = () => {
 
     if (!pet) return <div>Loading...</div>;
 
+    // Seleccionar la imagen de la mascota basada en el tipo
+    const getPetImage = (tipo) => {
+        switch (tipo) {
+            case 'DRAGON':
+                return dragon;
+            case 'UNICORNIO':
+                return unicorn;
+            case 'EXTRATERRESTRE':
+                return alien;
+            case 'FANTASMA':
+                return ghost;
+            default:
+                return null;
+        }
+    };
+
     return (
         <div style={styles.container}>
-            <h1 style={styles.heading}>{pet.nombre}</h1>
+            <div style={styles.petContainer}>
+                <img src={tamagochiFondo} alt="Tamagochi Fondo" style={styles.tamagochiFondo} />
+                <img src={getPetImage(pet.tipo)} alt={pet.nombre} style={styles.petImage} />
+            </div>
+            <h1 style={styles.heading}>{pet.nombre.toUpperCase()}</h1>
 
-            <ProgressBar label="Hunger" value={hunger} color="red" />
-            <ProgressBar label="Sleep" value={sleep} color="blue" />
-            <ProgressBar label="Love" value={love} color="pink" />
+            <ProgressBar label="EAT" value={hunger} color="green" />
+            <ProgressBar label="SLEEP" value={sleep} color="blue" />
+            <ProgressBar label="LOVE" value={love} color="pink" />
 
             <div style={styles.buttonContainer}>
-                <ActionButton label="Eat" onClick={handleEat} />
-                <ActionButton label="Sleep" onClick={handleSleep} />
-                <ActionButton label="Love" onClick={handleLove} />
+                <ActionButton label="EAT" onClick={handleEat} />
+                <ActionButton label="SLEEP" onClick={handleSleep} />
+                <ActionButton label="LOVE" onClick={handleLove} />
             </div>
 
-            <button onClick={() => navigate('/my-pets')} style={styles.button}>Back</button>
+            <button onClick={() => navigate('/my-pets')} style={styles.backButton}>
+                <img src="../assets/Flechalzquierda.svg" alt="Back" style={styles.backIcon} />
+                BACK
+            </button>
         </div>
     );
 };
 
 const styles = {
     container: {
-        backgroundColor: "#ffffff",
-        color: "#000000",
+        backgroundColor: "#111111",
+        color: "#ffffff",
         height: "100vh",
         display: "flex",
         flexDirection: "column",
@@ -97,23 +125,45 @@ const styles = {
         alignItems: "center",
         textAlign: "center",
     },
+    petContainer: {
+        position: "relative",
+        width: "250px",
+        height: "250px",
+    },
+    tamagochiFondo: {
+        width: "100%",
+        height: "auto",
+    },
+    petImage: {
+        position: "absolute",
+        top: "25%",
+        left: "50%",
+        transform: "translate(-50%, -25%)",
+        width: "100px",
+        height: "100px",
+    },
     heading: {
-        fontSize: "4.5rem",
-        marginBottom: "2rem",
+        fontSize: "2rem",
+        marginTop: "1rem",
     },
     buttonContainer: {
         display: "flex",
-        gap: "15px",
+        justifyContent: "space-around",
+        width: "100%",
+        maxWidth: "300px",
+        margin: "20px 0",
     },
-    button: {
-        backgroundColor: "#212529",
-        color: "#fff",
+    backButton: {
+        backgroundColor: "transparent",
+        color: "#ffffff",
         border: "none",
-        borderRadius: "5px",
-        padding: "15px 30px",
         fontSize: "1.5rem",
         cursor: "pointer",
-        margin: "20px 0",
+        display: "flex",
+        alignItems: "center",
+    },
+    backIcon: {
+        marginRight: "10px",
     },
 };
 
