@@ -62,9 +62,9 @@ const styles = {
     menuItem: {
         display: "flex",
         alignItems: "center",
-        justifyContent: "flex-start", // Alinea a la izquierda
-        width: "100%", // Asegura que todos los elementos tengan el mismo ancho
-        maxWidth: "300px", // Ancho máximo para centrar el contenido
+        justifyContent: "flex-start",
+        width: "100%", 
+        maxWidth: "300px",
         margin: "1.5rem 0",
         cursor: "pointer",
     },

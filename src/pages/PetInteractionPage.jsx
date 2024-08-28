@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getMascotaById, updateMascota } from '../services/mascotaService';
+import { getMascotaById, updateMascota } from '../services/api';
 import { ProgressBar } from '../components/ProgressBar';
 import { ActionButton } from '../components/ActionButton';
 
@@ -116,3 +116,4 @@ const styles = {
         margin: "20px 0",
     },
 };
+

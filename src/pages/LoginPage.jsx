@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useNavigate } from "react-router-dom";
-import {login} from "../services/authService"
+import {login} from "../services/api"
 import FlechaIzquierda from "../assets/FlechaIzquierda.svg"
 
 export const LoginPage = () => {
@@ -119,3 +119,4 @@ const styles = {
         transform: "scale(1.2)",
     },
 };
+

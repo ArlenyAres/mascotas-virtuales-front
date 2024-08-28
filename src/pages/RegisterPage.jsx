@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useNavigate} from "react-router-dom";
-import { register } from "../services/authService";
+import { register } from "../services/api";
 
 export const RegisterPage = () => {
     const [username, setUsername] = useState("");
@@ -74,16 +74,17 @@ const styles = {
         border: "1px solid #ccc",
     },
     button: {
-        backgroundColor: "#212529", // Fondo oscuro, similar al diseño
-        color: "#fff", // Texto blanco
-        border: "none", // Sin borde
-        borderRadius: "10px", // Bordes ligeramente redondeados
-        padding: "15px 100px", // Más espaciado para hacer los botones más largos
-        fontSize: "1.2rem", // Tamaño de fuente más grande
-        cursor: "pointer", // Cambia el cursor al pasar sobre el botón
-        margin: "15px 0", // Margen entre los botones
-        width: "80%", // Ancho para que coincida con el diseño
-        maxWidth: "300px", // Ancho máximo para pantallas más grandes
-        textAlign: "center", // Asegura que el texto esté centradorgin: "10px 0",
+        backgroundColor: "#212529", 
+        color: "#fff", 
+        border: "none", 
+        borderRadius: "10px", 
+        padding: "15px 100px", 
+        fontSize: "1.2rem", 
+        cursor: "pointer", 
+        margin: "15px 0",
+        width: "80%", 
+        maxWidth: "300px", 
+        textAlign: "center", 
     },
 };
+

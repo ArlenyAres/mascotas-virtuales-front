@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { createMascota } from '../services/mascotaService';
+import { createMascota } from '../services/api'; 
 import FlechaDerecha from '../assets/Flecha derecha.svg';
-import FlechaIzquierda from '../assets/Flechaizquierda.svg';
+import FlechaIzquierda from '../assets/FlechaIzquierda.svg';
 
 export const CustomizePetPage = () => {
     const { state } = useLocation();
@@ -11,32 +11,34 @@ export const CustomizePetPage = () => {
     const [name, setName] = useState('');
     const [backgroundColor, setBackgroundColor] = useState('#ffffff');
 
+    // const handleCreatePet = async () => {
+    //     try {
+    //         // Convertir el color a string (lo cual ya es por defecto, pero asegurar que sea un string correcto)
+    //         const colorAsString = backgroundColor.toString();
+
+    //         // Llamar al servicio para crear la mascota con el color en formato string
+    //         await createMascota(state.petType, name, colorAsString);
+    //         navigate('/my-pets');
+    //     } catch (error) {
+    //         console.error('Error creating pet:', error);
+    //     }
+    // };
+
     const handleCreatePet = async () => {
         try {
-            await createMascota(state.petType, name, backgroundColor);
+            const colorAsString = backgroundColor.toString();
+            // Transformar petType a mayúsculas
+            const petTypeUpperCase = state.petType.toUpperCase();
+
+            // Llamar al servicio para crear la mascota con el tipo de mascota en mayúsculas
+            await createMascota(petTypeUpperCase, name, colorAsString);
             navigate('/my-pets');
         } catch (error) {
             console.error('Error creating pet:', error);
         }
     };
 
-    /*const handleCreatePet = async () => {
-    try {
-        // Llama a createMascota y obtén la mascota recién creada
-        const nuevaMascota = await createMascota(state.petType, name, backgroundColor);
 
-        // Verifica que la respuesta tenga el ID de la mascota
-        if (nuevaMascota && nuevaMascota.id) {
-            // Redirige a la página de la mascota recién creada usando su ID
-            navigate(`/pet/${nuevaMascota.id}`);
-        } else {
-            console.error('Error: No se pudo obtener el ID de la nueva mascota');
-        }
-    } catch (error) {
-        console.error('Error creating pet:', error);
-    }
-};
- */
 
     return (
         <div style={{ ...styles.container, backgroundColor }}>
@@ -63,18 +65,19 @@ export const CustomizePetPage = () => {
                     />
                 </div>
             </div>
+            {/* guardar */}
             <div
                 style={styles.menuItem}
                 onClick={handleCreatePet}
-                onMouseEnter={() => setHovered('play')}
+                onMouseEnter={() => setHovered('save')}
                 onMouseLeave={() => setHovered(null)}
             >
                 <img
                     src={FlechaDerecha}
-                    alt="Play"
-                    style={hovered === 'play' ? { ...styles.arrow, ...styles.arrowHover } : styles.arrow}
+                    alt="Save"
+                    style={hovered === 'save' ? { ...styles.arrow, ...styles.arrowHover } : styles.arrow}
                 />
-                <span style={styles.menuText}>PLAY</span>
+                <span style={styles.menuText}>SAVE</span>
             </div>
             <div
                 style={styles.backContainer}

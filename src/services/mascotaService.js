@@ -1,4 +1,4 @@
-import api from "./api";
+/*import api from "./api";
 
 export const getAllMascotas = async () => {
   try {
@@ -55,3 +55,4 @@ export const deleteMascota = async (id) => {
     throw error;
   }
 };
+*/

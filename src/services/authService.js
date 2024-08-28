@@ -1,15 +1,19 @@
+/*
 import api from "./api";
 
 export const login = async (username, password) => {
   try {
-    console.log("Attempting login with:", username, password); // Verifica qué se está enviando
-    const response = await api.post("/auth/login", { username, password });
+    console.log("Attempting login with:", username, password); 
+    const response = await api.post("/auth/login", {
+      username,
+      password,
+    });
     const { token } = response.data;
     localStorage.setItem("token", token);
     return token;
   } catch (error) {
     if (error.response) {
-      console.error("Error data:", error.response.data); // Verifica si hay más detalles en la respuesta
+      console.error("Error data:", error.response.data); 
       console.error("Error status:", error.response.status);
     } else if (error.request) {
       console.error("No response received:", error.request);
@@ -22,7 +26,7 @@ export const login = async (username, password) => {
 
 export const register = async (username, email, password) => {
   try {
-    const response = await api.post("/auth/register", {
+    const response = await api.post("/auth/register'", {
       username,
       email,
       password,
@@ -45,3 +49,4 @@ export const getToken = () => {
 export const isAuthenticated = () => {
   return !!getToken(); // Devuelve true si hay un token, de lo contrario false
 };
+*/

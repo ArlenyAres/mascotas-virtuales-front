@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { getAllMascotas } from '../services/mascotaService';
+import { getAllMascotas } from '../services/api';
 import FlechaDerecha from '../assets/Flecha derecha.svg';
 import FlechaIzquierda from '../assets/Flechaizquierda.svg';
 
@@ -112,3 +112,5 @@ const styles = {
         fontSize: "1.9rem",
     }
 };
+
+

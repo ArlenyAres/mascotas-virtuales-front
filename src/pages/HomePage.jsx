@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import FlechaDerecha from '../assets/Flecha derecha.svg'; // Asegúrate de que la ruta sea correcta
+import FlechaDerecha from '../assets/Flecha derecha.svg';
 
 export const HomePage = () => {
     const navigate = useNavigate();
@@ -29,43 +29,44 @@ export const HomePage = () => {
 
 const styles = {
     container: {
-        backgroundColor: "#ffffff", // Fondo blanco
-        color: "#000000", // Texto negro
-        height: "100vh", // Asegura que el contenedor cubra toda la altura de la ventana
-        display: "flex", // Flexbox para centrar el contenido
-        flexDirection: "column", // Organiza el contenido en una columna
-        justifyContent: "flex-start", // Alinea el contenido hacia la parte superior
-        alignItems: "center", // Centra horizontalmente
-        textAlign: "center", // Centra el texto
-        paddingTop: "3rem", // Añadir espacio en la parte superior del contenedor si es necesario
+        backgroundColor: "#ffffff", 
+        color: "#000000", 
+        height: "100vh", 
+        display: "flex", 
+        flexDirection: "column", 
+        justifyContent: "flex-start", 
+        alignItems: "center", 
+        textAlign: "center", 
+        paddingTop: "3rem", 
     },
     heading: {
-        fontSize: "4.5rem", // Tamaño de fuente del encabezado
-        marginTop: "10rem", // Espacio superior para ajustar la posición
-        marginBottom: "1.5rem", // Ajusta el margen inferior
+        fontSize: "4.5rem",
+        marginTop: "10rem",
+        marginBottom: "1.5rem", 
     },
     paragraph: {
-        fontSize: "2.2rem", // Tamaño de fuente del párrafo
+        fontSize: "2.2rem", 
         marginBottom: "3rem",
         margin: "1.5rem"
     },
     startContainer: {
-        display: "flex", // Alinea el texto y la imagen en una fila
-        alignItems: "center", // Alinea verticalmente en el centro
-        cursor: "pointer", // Cambia el cursor al pasar sobre la imagen y el texto
-        gap: "1rem" // Espacio entre el texto y la imagen
+        display: "flex", 
+        alignItems: "center", 
+        cursor: "pointer", 
+        gap: "1rem" 
     },
     startText: {
         fontSize: "2.5rem", 
         marginTop: "2rem"
     },
     arrow: {
-        width: "50px", // Tamaño de la flecha
-        height: "auto", // Mantén la proporción
-        transition: "transform 0.3s ease", // Transición suave para el hover
+        width: "50px", 
+        height: "auto", 
+        transition: "transform 0.3s ease", 
         marginTop: "2rem"
     },
     arrowHover: {
-        transform: "scale(1.2)", // Agranda la flecha al hacer hover
+        transform: "scale(1.2)", 
     },
 };
+
