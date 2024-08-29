@@ -75,13 +75,13 @@ export const PetInteractionPage = () => {
     // Seleccionar la imagen de la mascota basada en el tipo
     const getPetImage = (tipo) => {
         switch (tipo) {
-            case 'DRAGON':
+            case 'DRAGOON':
                 return dragon;
-            case 'UNICORNIO':
+            case 'UNICORN':
                 return unicorn;
-            case 'EXTRATERRESTRE':
+            case 'ALIEN':
                 return alien;
-            case 'FANTASMA':
+            case 'GHOST':
                 return ghost;
             default:
                 return null;

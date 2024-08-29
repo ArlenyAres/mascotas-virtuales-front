@@ -11,27 +11,21 @@ export const CustomizePetPage = () => {
     const [name, setName] = useState('');
     const [backgroundColor, setBackgroundColor] = useState('#ffffff');
 
-    // const handleCreatePet = async () => {
-    //     try {
-    //         // Convertir el color a string (lo cual ya es por defecto, pero asegurar que sea un string correcto)
-    //         const colorAsString = backgroundColor.toString();
-
-    //         // Llamar al servicio para crear la mascota con el color en formato string
-    //         await createMascota(state.petType, name, colorAsString);
-    //         navigate('/my-pets');
-    //     } catch (error) {
-    //         console.error('Error creating pet:', error);
-    //     }
-    // };
 
     const handleCreatePet = async () => {
         try {
             const colorAsString = backgroundColor.toString();
-            // Transformar petType a mayúsculas
-            const petTypeUpperCase = state.petType.toUpperCase();
+            const tipoMascota = state.petType.toUpperCase();
 
-            // Llamar al servicio para crear la mascota con el tipo de mascota en mayúsculas
-            await createMascota(petTypeUpperCase, name, colorAsString);
+            console.log('tipoMascota', tipoMascota);
+            console.log('name', name);
+            console.log('color', colorAsString);
+
+            
+            const nuevaMascota = await createMascota(tipoMascota, name, colorAsString);
+
+            console.log("Nueva mascota creada con id:", nuevaMascota.id);
+
             navigate('/my-pets');
         } catch (error) {
             console.error('Error creating pet:', error);

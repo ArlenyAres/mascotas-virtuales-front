@@ -14,6 +14,9 @@ api.interceptors.request.use((config) => {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
+  }, (error) => {
+    return Promise.reject(error);
+  
 });
 
 // Servicios de Autenticación
@@ -81,6 +84,8 @@ export const getAllMascotas = async () => {
 
 export const getMascotaById = async (id) => {
   try {
+    // const token = localStorage.getItem("Token");
+    // console.log("Token being sent:", token);
     const response = await api.get(`/mascotas/${id}`);
     return response.data;
   } catch (error) {
@@ -89,11 +94,11 @@ export const getMascotaById = async (id) => {
   }
 };
 
-export const createMascota = async (mascotaId, nombre, color) => {
+export const createMascota = async (tipoMascota, nombre, color) => {
   try {
-    console.log("Creating Mascota with:", { mascotaId, nombre, color });
+    console.log("Creating Mascota with:", { tipoMascota, nombre, color });
     const response = await api.post("/mascotas/personalizar", {
-      mascotaId,
+      tipoMascota,
       nombre,
       color,
     });
