@@ -4,10 +4,11 @@ import { getMascotaById, updateMascota } from '../services/api';
 import { ProgressBar } from '../components/ProgressBar';
 import { ActionButton } from '../components/ActionButton';
 import tamagochiFondo from '../assets/tamacogochi fondo.svg';
-import alien from "../assets/DALL·E  alien.svg"
-import dragon from "../assets/DALL·E dragon.svg";
-import ghost from "../assets/DALL·E ghost.svg";
-import unicorn from "../assets/DALL·E unicorn.svg";
+import alien from "../assets/alien.png"
+import dragon from "../assets/dragon.png";
+import ghost from "../assets/ghost.png";
+import unicorn from "../assets/unicorn.png";
+import FlechaIzquierda from "../assets/FlechaIzquierda.svg"
 
 export const PetInteractionPage = () => {
     const { id } = useParams();
@@ -16,6 +17,7 @@ export const PetInteractionPage = () => {
     const [hunger, setHunger] = useState(100);
     const [sleep, setSleep] = useState(100);
     const [love, setLove] = useState(100);
+    const [hovered, setHovered] = useState(null); // Estado para manejar el hover en el botón de back
 
     useEffect(() => {
         const fetchPet = async () => {
@@ -89,34 +91,53 @@ export const PetInteractionPage = () => {
     };
 
     return (
-        <div style={styles.container}>
+        <div style={{ ...styles.container, backgroundColor: pet.color }}>
             <div style={styles.petContainer}>
+                <h1 style={styles.heading}>{pet.nombre.toUpperCase()}</h1>
                 <img src={tamagochiFondo} alt="Tamagochi Fondo" style={styles.tamagochiFondo} />
                 <img src={getPetImage(pet.tipo)} alt={pet.nombre} style={styles.petImage} />
             </div>
-            <h1 style={styles.heading}>{pet.nombre.toUpperCase()}</h1>
 
-            <ProgressBar label="EAT" value={hunger} color="green" />
-            <ProgressBar label="SLEEP" value={sleep} color="blue" />
-            <ProgressBar label="LOVE" value={love} color="pink" />
-
-            <div style={styles.buttonContainer}>
-                <ActionButton label="EAT" onClick={handleEat} />
-                <ActionButton label="SLEEP" onClick={handleSleep} />
-                <ActionButton label="LOVE" onClick={handleLove} />
+            <div style={styles.statContainer}>
+                <div style={styles.statItem}>
+                    <div style={{ flexGrow: 1 }}>
+                        <ProgressBar label="EAT" value={hunger} color="green" />
+                    </div>
+                    <ActionButton label="EAT" onClick={handleEat} />
+                </div>
+                <div style={styles.statItem}>
+                    <div style={{ flexGrow: 1 }}>
+                        <ProgressBar label="SLEEP" value={sleep} color="blue" />
+                    </div>
+                    <ActionButton label="SLEEP" onClick={handleSleep} />
+                </div>
+                <div style={styles.statItem}>
+                    <div style={{ flexGrow: 1 }}>
+                        <ProgressBar label="LOVE" value={love} color="pink" />
+                    </div>
+                    <ActionButton label="LOVE" onClick={handleLove} />
+                </div>
             </div>
 
-            <button onClick={() => navigate('/my-pets')} style={styles.backButton}>
-                <img src="../assets/Flechalzquierda.svg" alt="Back" style={styles.backIcon} />
-                BACK
-            </button>
+            <div
+                style={styles.backContainer}
+                onClick={() => navigate('/user-menu')}
+                onMouseEnter={() => setHovered('back')}
+                onMouseLeave={() => setHovered(null)}
+            >
+                <img
+                    src={FlechaIzquierda}
+                    alt="Back"
+                    style={hovered === 'back' ? { ...styles.arrow, ...styles.arrowHover } : styles.arrow}
+                />
+                <span style={styles.backText}>BACK</span>
+            </div>
         </div>
     );
 };
 
 const styles = {
     container: {
-        backgroundColor: "#111111",
         color: "#ffffff",
         height: "100vh",
         display: "flex",
@@ -127,8 +148,9 @@ const styles = {
     },
     petContainer: {
         position: "relative",
-        width: "250px",
-        height: "250px",
+        width: "18rem",
+        height: "25rem",
+        marginBottom: "1rem",
     },
     tamagochiFondo: {
         width: "100%",
@@ -136,34 +158,57 @@ const styles = {
     },
     petImage: {
         position: "absolute",
-        top: "25%",
+        top: "50%",
         left: "50%",
-        transform: "translate(-50%, -25%)",
+        transform: "translate(-50%, -50%)",
         width: "100px",
         height: "100px",
     },
     heading: {
-        fontSize: "2rem",
-        marginTop: "1rem",
+        position: "absolute",
+        top: "-9rem",
+        left: "9.2rem",
+        transform: "translate(-50%, -10%)",
+        fontSize: "5.5rem",
+        zIndex: 1, 
     },
-    buttonContainer: {
+    statContainer: {
         display: "flex",
-        justifyContent: "space-around",
+        flexDirection: "column",
+        gap: "1rem",
         width: "100%",
         maxWidth: "300px",
-        margin: "20px 0",
+        marginBottom: "1rem",
     },
-    backButton: {
-        backgroundColor: "transparent",
-        color: "#ffffff",
-        border: "none",
-        fontSize: "1.5rem",
-        cursor: "pointer",
+    statItem: {
         display: "flex",
         alignItems: "center",
+        width: "100%",
+        gap: "1rem",
     },
+
+    
     backIcon: {
         marginRight: "10px",
+    },
+    arrow: {
+        width: "50px",
+        height: "auto",
+        transition: "transform 0.3s ease",
+    },
+    arrowHover: {
+        transform: "scale(1.2)",
+    },
+    backContainer: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center", 
+        gap: "1rem", 
+        marginTop: "2rem",
+        cursor: "pointer",
+    },
+    backText: {
+        fontSize: "2.5rem",
     },
 };
 
