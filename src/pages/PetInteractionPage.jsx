@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { getMascotaById, updateMascota } from '../services/api';
+import { getMascotaById, updateMascota, deleteMascota } from '../services/api'; // Importa deleteMascota
 import { ProgressBar } from '../components/ProgressBar';
 import { ActionButton } from '../components/ActionButton';
 import tamagochiFondo from '../assets/tamacogochi fondo.svg';
@@ -17,8 +17,8 @@ export const PetInteractionPage = () => {
     const [hunger, setHunger] = useState(100);
     const [sleep, setSleep] = useState(100);
     const [love, setLove] = useState(100);
-    const [hovered, setHovered] = useState(null); 
-
+    const [hovered, setHovered] = useState(null);
+    const [hoveredDelete, setHoveredDelete] = useState(null); // Estado para manejar el hover en el botón de delete
 
     useEffect(() => {
         const fetchPet = async () => {
@@ -73,10 +73,18 @@ export const PetInteractionPage = () => {
         }
     };
 
+    const handleDelete = async () => {
+        try {
+            await deleteMascota(id);
+            navigate('/user-menu'); // Redirige al menú del usuario después de eliminar la mascota
+        } catch (error) {
+            console.error('Error deleting pet:', error);
+        }
+    };
+
     if (!pet) return <div>Loading...</div>;
 
     const getPetImage = (tipoMascota) => {
-       
         switch (tipoMascota?.toUpperCase()) {
             case 'DRAGOON':
                 return dragon;
@@ -88,22 +96,14 @@ export const PetInteractionPage = () => {
                 return ghost;
             default:
                 return null;
-                
         }
-        
     };
-    
-    //console.log(getPetImage(pet.tipoMascota));
 
     return (
         <div style={{ ...styles.container, backgroundColor: pet.color }}>
-
             <div style={styles.petContainer}>
-
                 <h1 style={styles.heading}>{pet.nombre.toUpperCase()}</h1>
-
                 <img src={tamagochiFondo} alt="Tamagochi Fondo" style={styles.tamagochiFondo} />
-
                 <img src={getPetImage(pet.tipoMascota)} alt={pet.nombre} style={styles.petImage} />
             </div>
 
@@ -141,6 +141,20 @@ export const PetInteractionPage = () => {
                 />
                 <span style={styles.backText}>BACK</span>
             </div>
+
+            <div
+                style={styles.deleteContainer}
+                onClick={handleDelete}
+                onMouseEnter={() => setHoveredDelete('delete')}
+                onMouseLeave={() => setHoveredDelete(null)}
+            >
+                <img
+                    src={FlechaIzquierda}
+                    alt="Delete"
+                    style={hoveredDelete === 'delete' ? { ...styles.arrow, ...styles.arrowHover } : styles.arrow}
+                />
+                <span style={styles.deleteText}>DELETE</span>
+            </div>
         </div>
     );
 };
@@ -154,20 +168,23 @@ const styles = {
         justifyContent: "center",
         alignItems: "center",
         textAlign: "center",
+        
     },
     petContainer: {
         position: "relative",
-        width: "18rem",
+        width: "16rem",
         height: "25rem",
         marginBottom: "1rem",
-        display :"flex",
+        display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        
+        marginTop: "2.5rem"
+
     },
     tamagochiFondo: {
-        width: "100%",
+        width: "75vh",
         height: "auto",
+        
     },
     petImage: {
         position: "absolute",
@@ -180,20 +197,21 @@ const styles = {
         maxHeight: "100%",
         objectFit: "contain",
         zIndex: "36",
-        
+
     },
     heading: {
         position: "absolute",
-        top: "-8rem",
-        left: "9.2rem",
+        top: "-5.3rem",
+        left: "8.2rem",
         transform: "translate(-50%, -10%)",
-        fontSize: "5.5rem",
-        zIndex: 1, 
+        fontSize: "3.5rem",
+        zIndex: 1,
+        
     },
     statContainer: {
         display: "flex",
         flexDirection: "column",
-        gap: "1rem",
+        gap: "0.8rem",
         width: "100%",
         maxWidth: "300px",
         marginBottom: "1rem",
@@ -205,10 +223,6 @@ const styles = {
         gap: "1rem",
     },
 
-    
-    backIcon: {
-        marginRight: "10px",
-    },
     arrow: {
         width: "50px",
         height: "auto",
@@ -220,13 +234,25 @@ const styles = {
     backContainer: {
         display: "flex",
         alignItems: "center",
-        justifyContent: "center", 
-        gap: "1rem", 
+        justifyContent: "center",
+        gap: "1rem",
         marginTop: "2rem",
         cursor: "pointer",
     },
     backText: {
         fontSize: "2.5rem",
+        color: "black",
+    },
+    deleteContainer: {
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        gap: "1rem",
+        marginTop: "1rem",
+        cursor: "pointer",
+    },
+    deleteText: {
+        fontSize: "2.5rem",
+        color: "Black", 
     },
 };
-
