@@ -85,6 +85,7 @@ const styles = {
         maxWidth: "300px",
         margin: "1.5rem 0",
         cursor: "pointer",
+        gap: "1rem"
     },
     menuText: {
         fontSize: "2.5rem",
@@ -100,8 +101,8 @@ const styles = {
     backContainer: {
         display: "flex",
         alignItems: "center",
-        justifyContent: "center", // Centra horizontalmente
-        gap: "1rem", // Espacio entre la flecha y el texto
+        justifyContent: "center", 
+        gap: "1rem",
         marginTop: "2rem",
         cursor: "pointer",
     },

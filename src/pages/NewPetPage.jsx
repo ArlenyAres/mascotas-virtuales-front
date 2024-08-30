@@ -67,6 +67,7 @@ const styles = {
         maxWidth: "300px",
         margin: "1.5rem 0",
         cursor: "pointer",
+        gap: "1rem"
     },
     menuText: {
         fontSize: "2.5rem",
@@ -74,6 +75,7 @@ const styles = {
     arrow: {
         width: "50px",
         height: "auto",
+        marginLeft: "2rem",
         transition: "transform 0.3s ease",
     },
     arrowHover: {
@@ -82,11 +84,12 @@ const styles = {
     backContainer: {
         display: "flex",
         alignItems: "center",
-        justifyContent: "flex-start", // Alinea a la izquierda
-        width: "100%", // Asegura que todos los elementos tengan el mismo ancho
-        maxWidth: "300px", // Ancho máximo para centrar el contenido
-        marginTop: "2rem",
+        width: "100%", 
+        maxWidth: "300px",
+        marginTop: "4rem",
+        marginLeft: "5rem",
         cursor: "pointer",
+        gap: "1rem"
     },
     backText: {
         fontSize: "2.5rem",

@@ -182,6 +182,7 @@ const styles = {
 
     },
     tamagochiFondo: {
+        marginTop: "1rem",
         width: "75vh",
         height: "auto",
         
@@ -206,6 +207,8 @@ const styles = {
         transform: "translate(-50%, -10%)",
         fontSize: "3.5rem",
         zIndex: 1,
+        color: "black",
+        textStroke : "3px",
         
     },
     statContainer: {

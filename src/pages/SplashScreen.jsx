@@ -11,7 +11,7 @@ export const SplashScreen = () => {
         <div style={styles.container}>
             <img src={WelcomeSVG} alt="Welcome" style={styles.welcome} />
             <img src={ILoveSVG} alt="I Love Burger" style={styles.iLove} />
-            {/*    <button style={styles.button} onClick={() => navigate('/home')}>Start</button> */}
+            {    <button style={styles.button} onClick={() => navigate('/home')}>NEXT</button> }
         </div>
     );
 };
@@ -20,6 +20,8 @@ const styles = {
     container: {
         backgroundImage: `url(${fondo})`,
         backgroundSize: 'cover',
+        top: "2.5rem",
+        
         height: '100vh',
         width: '100vw',  
         display: 'flex',
