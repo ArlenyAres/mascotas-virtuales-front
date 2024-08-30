@@ -17,7 +17,8 @@ export const PetInteractionPage = () => {
     const [hunger, setHunger] = useState(100);
     const [sleep, setSleep] = useState(100);
     const [love, setLove] = useState(100);
-    const [hovered, setHovered] = useState(null); // Estado para manejar el hover en el botón de back
+    const [hovered, setHovered] = useState(null); 
+
 
     useEffect(() => {
         const fetchPet = async () => {
@@ -36,10 +37,10 @@ export const PetInteractionPage = () => {
 
     useEffect(() => {
         const interval = setInterval(() => {
-            setHunger((prev) => Math.max(prev - 10, 0));
+            setHunger((prev) => Math.max(prev - 12, 0));
             setSleep((prev) => Math.max(prev - 10, 0));
-            setLove((prev) => Math.max(prev - 10, 0));
-        }, 30000);
+            setLove((prev) => Math.max(prev - 6, 0));
+        }, 10000);
 
         return () => clearInterval(interval);
     }, []);
@@ -74,9 +75,9 @@ export const PetInteractionPage = () => {
 
     if (!pet) return <div>Loading...</div>;
 
-    // Seleccionar la imagen de la mascota basada en el tipo
-    const getPetImage = (tipo) => {
-        switch (tipo) {
+    const getPetImage = (tipoMascota) => {
+       
+        switch (tipoMascota?.toUpperCase()) {
             case 'DRAGOON':
                 return dragon;
             case 'UNICORN':
@@ -87,15 +88,23 @@ export const PetInteractionPage = () => {
                 return ghost;
             default:
                 return null;
+                
         }
+        
     };
+    
+    //console.log(getPetImage(pet.tipoMascota));
 
     return (
         <div style={{ ...styles.container, backgroundColor: pet.color }}>
+
             <div style={styles.petContainer}>
+
                 <h1 style={styles.heading}>{pet.nombre.toUpperCase()}</h1>
+
                 <img src={tamagochiFondo} alt="Tamagochi Fondo" style={styles.tamagochiFondo} />
-                <img src={getPetImage(pet.tipo)} alt={pet.nombre} style={styles.petImage} />
+
+                <img src={getPetImage(pet.tipoMascota)} alt={pet.nombre} style={styles.petImage} />
             </div>
 
             <div style={styles.statContainer}>
@@ -151,6 +160,10 @@ const styles = {
         width: "18rem",
         height: "25rem",
         marginBottom: "1rem",
+        display :"flex",
+        justifyContent: "center",
+        alignItems: "center",
+        
     },
     tamagochiFondo: {
         width: "100%",
@@ -158,15 +171,20 @@ const styles = {
     },
     petImage: {
         position: "absolute",
-        top: "50%",
+        top: "50.5%",
         left: "50%",
         transform: "translate(-50%, -50%)",
-        width: "100px",
-        height: "100px",
+        width: "10rem",
+        height: "9.2rem",
+        maxWidth: "100%",
+        maxHeight: "100%",
+        objectFit: "contain",
+        zIndex: "36",
+        
     },
     heading: {
         position: "absolute",
-        top: "-9rem",
+        top: "-8rem",
         left: "9.2rem",
         transform: "translate(-50%, -10%)",
         fontSize: "5.5rem",

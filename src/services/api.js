@@ -84,9 +84,9 @@ export const getAllMascotas = async () => {
 
 export const getMascotaById = async (id) => {
   try {
-    // const token = localStorage.getItem("Token");
-    // console.log("Token being sent:", token);
+    
     const response = await api.get(`/mascotas/${id}`);
+    //console.log("Respuesta de la API:", response.data);
     return response.data;
   } catch (error) {
     console.error("Error fetching mascota:", error);
