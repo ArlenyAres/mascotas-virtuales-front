@@ -18,7 +18,7 @@ export const PetInteractionPage = () => {
     const [sleep, setSleep] = useState(100);
     const [love, setLove] = useState(100);
     const [hovered, setHovered] = useState(null);
-    const [hoveredDelete, setHoveredDelete] = useState(null); // Estado para manejar el hover en el botón de delete
+    const [hoveredDelete, setHoveredDelete] = useState(null); 
 
     useEffect(() => {
         const fetchPet = async () => {
@@ -76,7 +76,7 @@ export const PetInteractionPage = () => {
     const handleDelete = async () => {
         try {
             await deleteMascota(id);
-            navigate('/user-menu'); // Redirige al menú del usuario después de eliminar la mascota
+            navigate('/user-menu');
         } catch (error) {
             console.error('Error deleting pet:', error);
         }
